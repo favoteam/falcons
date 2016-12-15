@@ -27,7 +27,7 @@
 <div class="Logo-r">
   <div class="Logo-info-r"> 
   	<a href="./" class="logo"></a>
-    <span class="register disable-by-cy">Sign in</span>
+    <span class="register disable-by-cy">{$lang.label_login}</span>
 	<!-- #BeginLibraryItem "/library/user_right.lbi" --><!-- #EndLibraryItem -->
   </div>
 </div>
@@ -78,7 +78,7 @@
             <div class="item">
               <input type="hidden" name="act" value="act_login" />
               <input type="hidden" name="back_act" value="{$back_act}" />
-              <input type="button" name="submit" onClick="userLogin()" class="btn-img btn-entry" id="loginBtn" value="Sign in" />
+              <input type="button" name="submit" onClick="userLogin()" class="btn-img btn-entry" id="loginBtn" value="{$lang.label_login}" />
             </div>
             <div class="blank"></div>
             <div class="item disable-by-cy">
@@ -138,13 +138,13 @@ function userLogin()
 				}
 				else
 				{
-				   $('#loginBtn').val('Sign in').attr('disabled',false);
+				   $('#loginBtn').val('{$lang.label_login}').attr('disabled',false);
 				   $("#login_error").html(result.err_msg);	
 				   return;
 				}
 			},
 			error:function(){
-				$('#loginBtn').val('Sign in').attr('disabled',false);
+				$('#loginBtn').val('{$lang.label_login}').attr('disabled',false);
 			}
 	});
 }

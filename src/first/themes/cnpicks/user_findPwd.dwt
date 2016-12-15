@@ -469,7 +469,7 @@ function erweima1(obj, sType) { var oDiv = document.getElementById(obj); if (sTy
 							</p>
 							<p>Please remenber your new password.</p>
 							<p class="on_go">
-								<a href="user.php" title="Sign in now">Sign in &gt;&gt;</a>
+								<a href="user.php" title="{$lang.label_login} now">{$lang.label_login} &gt;&gt;</a>
 							</p>
 						</div>
 					</div>

@@ -735,8 +735,8 @@ $_LANG['orgtotal'] = 'Original Price';
 $_LANG['heart_buy'] = 'Take Action';
 
 /* 其他模板涉及常用语言项 */
-$_LANG['label_regist'] = 'regist';
-$_LANG['label_login'] = 'login';
+$_LANG['label_regist'] = 'Register';
+$_LANG['label_login'] = 'Login';
 $_LANG['label_profile'] = 'user profile';
 $_LANG['article_list'] = 'article list';
 $_LANG['Preferences_price'] = 'Preferences price';

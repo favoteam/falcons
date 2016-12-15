@@ -14,6 +14,10 @@
 <link rel="icon" href="animated_favicon.gif" type="image/gif" />
 <link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="themes/cnpicks/js/jquery-1.9.1.min.js"></script>
+
+<script type="text/javascript" src="themes/cnpicks/js/brand.js" ></script>
+<script type="text/javascript" src="themes/cnpicks/js/main.js" ></script>
+{insert_scripts files='jquery.json.js,transport.js'}
 <!-- <script type="text/javascript" src="themes/cnpicks/js/common_www_ecshop68_com.js" ></script> -->
 {insert_scripts files='transport.js'}
 {* 包含脚本文件 *}
@@ -398,38 +402,78 @@
               <!--#我的标签 end--> 
               <!--*关注的店铺列表页面 start--> 
               <!--{if $action eq 'follow_shop'} --> 
+                <!-- #BeginLibraryItem "/library/login.lbi" --><!-- #EndLibraryItem -->
+<link rel="stylesheet" href="themes/cnpicks/css.css">
+
+              <link rel="stylesheet" href="themes/cnpicks/css/brands.css">
               {insert_scripts files='transport.js,utils.js'}
               <div class="tabmenu">
                 <ul class="tab pngFix">
-                  <li class="active"><a>我关注的店铺</a></li>
+                  <li class="active"><a>Favorite Stores</a></li>
                 </ul>
               </div>
+              <style type="text/css">
+			  .flow-wrap{width:auto}
+			  .collect {
+  background: url(images/shengji_ad/goods_act.png) no-repeat 0 0;
+  background-position: -75px 4px;
+  border: 1px solid #c8c9cd;
+  display: inline-block;
+  font-size: 14px;
+  height: 34px;
+  line-height: 34px;
+  padding-left: 30px;
+  padding-right: 10px;
+  text-decoration: none;
+  width: auto;
+}
+
+			  </style>
+              
+              <div class="flow-wrap clearfix">
+<!--{foreach from=$shop_list item=shop}-->
+	<div class="flow-item first"> 
+      <div class="flow-content">
+      	<p class="flow-title">
+			<a href="{$shop.url}" title="{$shop.supplier_title}"><span>{$shop.supplier_name}</span></a> 
+            
+            <span id="collect_brand_{$shop.supplierid}">{insert name=collect_btn id=$shop.supplierid}</span>
+            
+            
+        </p>
+		<p class="flow-desc">
+        	<a href="{$shop.url}" title="All items"><strong>{$shop.goods_number}</strong> items>></a>
+        </p>
+      </div>
+	  <div class="flow-main flow-main{$smarty.foreach.shop.iteration}">
+      	<div class="picMarquee-left">
+			<div class="bda">
+		 {if $shop.goods_info}
+		<div class="picListta">
+			<ul>
+			{foreach from=$shop.goods_info item=goods name=goods}
+				<li>
+					<a href="{$goods.url}" title="{$goods.goods_name}" target="_blank" class="img">
+						<div class="img220"><img src="{$goods.goods_thumb}"> </div>
+						<span>${$goods.shop_p}</span> 
+					</a> 
+					<a href="{$goods.url}" title="{$goods.goods_name}" target="_blank" class="name" style="display:none">{$goods.goods_name}</a> 
+				</li>
+			{/foreach}
+			</ul>
+               </div>
+	       {/if}
+			</div>
+		</div>
+      </div>	
+	</div>
+<!--{foreachelse}-->
+
+<!--{/foreach}-->	
+</div>
+              
               <div class="mar_top">
-                <table class="ncm-default-table">
-                  <thead>
-                    <tr>
-                      <th colspan="2">Store</th>
-                      <th class="w150">Name</th>
-                      <th class="w150">QQ</th>
-                      <th class="w100">WangWang</th>
-                      <th class="w110">Option</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <!--{foreach from=$shop_list item=shop}-->
-                    <tr class="bd-line">
-                      <td class="w70"><div class="ncm-goods-thumb" style="padding:10px;"><a href="{$shop.url}" title="{$shop.shop_name}"><img src="{$shop.shop_logo}"  style="border:1px #E4E4E4 solid"/></a></div></td>
-                      <td><dl class="goods-name">
-                          <dt><a href="{$shop.url}" title="{$shop.shop_name}">{$shop.shop_name}</a> </dt>
-                        </dl></td>
-                      <td><a href="{$shop.url}" class="f6">{$shop.supplier_name|escape:html}</a></td>
-                      <td>{$shop.qq}</td>
-                      <td>{$shop.ww}</td>
-                      <td class="ncm-table-handle"><span><a href="javascript:if (confirm('Confirm your option')) location.href='user.php?act=del_follow&rec_id={$shop.id}'" class="f6">取消关注</a></span></td>
-                    </tr>
-                    <!--{/foreach} -->
-                  </tbody>
-                </table>
+              
                 <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem --> </div>
               
               <!--{/if}--> 
@@ -448,7 +492,7 @@
 						<ul>
                           <!--{foreach from=$goods_list item=goods name=name}-->
                           <li class="favorite-pic-list" {if $smarty.foreach.name.iteration % 4 eq 0}style="margin-right:0px;"{/if}>
-                            <div class="favorite-goods-thumb"><a href="{$goods.url}" target="_blank"><img src="{$goods.thumb}"></a></div>
+                            <div class="favorite-goods-thumb"><a href="{$goods.url}" target="_blank" id="li_{$goods.goods_id}"><img class="goodsimg pic_img_{$goods.goods_id}" src="{$goods.thumb}"></a></div>
                             <div class="favorite-goods-info">
                               <dl>
                                 <dt>
@@ -467,11 +511,14 @@
                                   </strong> </span> </dd>
                                 <dd class="hover_tan"> 
                                  
-                                  <!-- {if $goods.is_pre_sale == 1} -->
-                                  <i class="cart"></i><a href="pre_sale.php?id={$goods.pre_sale_id}" target="_blank" class="ncm-btn-mini">{$lang.button_buy}</a> <i class="del"></i><a href="javascript:if (confirm('{$lang.remove_collection_confirm}')) location.href='user.php?act=delete_collection&collection_id={$goods.rec_id}'" class="ncm-btn-mini ncm-btn-mini1">{$lang.drop}</a> </dd>
-                                  <!-- {else} -->
-                                  <i class="cart"></i><a href="javascript:addToCart({$goods.goods_id})" class="ncm-btn-mini">{$lang.add_to_cart}</a> <i class="del"></i><a href="javascript:if (confirm('{$lang.remove_collection_confirm}')) location.href='user.php?act=delete_collection&collection_id={$goods.rec_id}'" class="ncm-btn-mini ncm-btn-mini1">{$lang.drop}</a> </dd>
-                                  <!-- {/if} -->
+                                 
+                                 <a href="javascript:addToCart({$goods.goods_id});" class="buy-btn"></a>
+			  
+              
+                <a id="collect_{$goods.goods_id}" href="javascript:del_collect({$goods.goods_id});" class="collet-btn collet-btn-t"></a>
+                
+                          
+                                 </dd>
                               </dl>
                             </div>
                           </li>
@@ -480,6 +527,65 @@
                         
 				</div>
               </div>
+              <script type="Text/Javascript" language="JavaScript">
+<!--
+re_collect();
+var sdelay=0;
+function returnTop() {
+ window.scrollBy(0,-100);//Only for y vertical-axis
+ if(document.body.scrollTop>0) { 
+  sdelay= setTimeout('returnTop()',50);
+ }
+}
+function del_collect(id)
+{
+  goods_id = (typeof(id) == "undefined" ? 0 : id);
+  Ajax.call('user.php?act=del_collect', 'id=' + goods_id, del_collectResponse, 'GET', 'JSON');
+}
+function del_collectResponse(result)
+{
+  console.log(result);
+  if (result.goods_id > 0)
+  {
+    var collect_btn = document.getElementById("collect_" + result.goods_id);
+    collect_btn.className = (result.is_collect == 1 ? "collet-btn collet-btn-t" : "collet-btn");
+    collect_btn.href = "javascript:re_collect("+result.goods_id+")";
+  }
+  else
+  {
+    $("a[id^='collect_']").className = "collet-btn";
+    for(i = 0; i < result.is_collect.length; i++)
+    {
+      document.getElementById("collect_" + result.is_collect[i]).className = "collet-btn collet-btn-t";
+    }
+  }
+}
+function re_collect(id)
+{
+  goods_id = (typeof(id) == "undefined" ? 0 : id);
+  Ajax.call('user.php?act=collect', 'id=' + goods_id, re_collectResponse, 'GET', 'JSON');
+}
+function re_collectResponse(result)
+{
+  if (result.goods_id > 0)
+  {
+    document.getElementById("collect_" + result.goods_id).className = (result.is_collect == 1 ? "collet-btn collet-btn-t" : "collet-btn");
+  }
+  else
+  {
+    $("a[id^='collect_']").className = "collet-btn";
+    for(i = 0; i < result.is_collect.length; i++)
+    {
+      document.getElementById("collect_" + result.is_collect[i]).className = "collet-btn collet-btn-t";
+    }
+  }
+}
+function selectPage(sel)
+{
+  sel.form.submit();
+}
+//-->
+</script> 
                 <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem --> </div>
               <div class="tabmenu" style="display:none">
                 <ul class="tab pngFix">

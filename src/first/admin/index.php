@@ -160,13 +160,13 @@ elseif ($_REQUEST['act'] == 'menu')
 elseif ($_REQUEST['act'] == 'clear_cache')
 {
 	
-	$sql = "UPDATE " . $GLOBALS['ecs']->table('brand') . "
+	/*$sql = "UPDATE " . $GLOBALS['ecs']->table('brand') . "
 						SET rand_ids = '',rand_date=''";
 	$GLOBALS['db']->query($sql);
 			
 	$sql = "UPDATE " . $GLOBALS['ecs']->table('category') . "
 						SET rand_ids = '',rand_date=''";
-	$GLOBALS['db']->query($sql);
+	$GLOBALS['db']->query($sql);*/
 			
     clear_all_files();
     clearhtml_all();  //代码增加   By  www.68ecshop.com

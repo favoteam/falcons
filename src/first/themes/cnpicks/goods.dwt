@@ -15,12 +15,16 @@
 <script type="text/javascript" src="themes/cnpicks/js/common_www_ecshop68_com.js" ></script>
 <!-- <script type="text/javascript" src="themes/cnpicks/js/magiczoom.js" ></script> -->
 <script type="text/javascript" src="themes/cnpicks/js/magiczoom_plus.js" ></script>
-<script type="text/javascript" src="themes/cnpicks/js/jquery-1.7.2_www_ecshop68_com.js" ></script>
+<script type="text/javascript" src="themes/cnpicks/js/jquery-1.9.1.min.js" ></script>
 <script type="text/javascript" src="themes/cnpicks/js/script.js" ></script>
 <script type="text/javascript" src="themes/cnpicks/js/scrollpic.js"></script>
 <script type="text/javascript" src="themes/cnpicks/js/gw_totop.js" ></script>
 <link rel="stylesheet" type="text/css" href="themes/cnpicks/css/pshow.css" />
 <link rel="stylesheet" type="text/css" href="themes/cnpicks/css/goods.css" />
+<script type="text/javascript" src="themes/cnpicks/js/main.js" ></script>
+<script type="text/javascript" src="themes/cnpicks/js/brand.js" ></script>
+<link rel="stylesheet" href="themes/cnpicks/css.css">
+
 {insert_scripts files='common.js'}
 </head>
 <body>
@@ -32,6 +36,8 @@
 <div id="site-nav"> <!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
   <div class="blank"></div>
   <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+  <!-- #BeginLibraryItem "/library/login.lbi" --><!-- #EndLibraryItem -->
+
   <div class="content-wrap" style="height:auto;">
     <!-- <div id="product-intro" class="goods_photo"> -->
     <div>
@@ -393,7 +399,7 @@
                 {if $smarty.session.user_id gt 0}
                   <a href="javascript:collect_goods({$goods.goods_id})" class="btn-coll {if $goods.is_collet eq 1}btn-coll-t{/if}" id="collect_goods">Favorite{if $goods.is_collet eq 1}d{/if}</a>
                 {else}
-                  <a href="user.php" class="btn-coll {if $goods.is_collet eq 1}btn-coll-t{/if}">Favorite{if $goods.is_collet eq 1}d{/if}</a>
+                  <a href="javascript:openLogin()" class="btn-coll {if $goods.is_collet eq 1}btn-coll-t{/if}">Favorite{if $goods.is_collet eq 1}d{/if}</a>
                 {/if}
               </div>          
               <script type="text/javascript">
@@ -695,7 +701,6 @@ var suppid = {$goods.supplier_id};
 </script>
 <script type="text/javascript" src="{$option.static_path}js/compare.js"></script>
 <script type="text/javascript" src="{$option.static_path}js/json2.js"></script>
-<script type="text/javascript" src="{$option.static_path}js/jquery.js"></script>
 {insert_scripts files='jquery.json.js,transport.js'}
 <script>
 $(document).ready(function(e) {

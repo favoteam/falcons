@@ -4,7 +4,7 @@
         <li>
           <p class="pic"><a href="{$bestgoods.url}" target="_blank" ><img src="{$bestgoods.goods_thumb}" ></a></p>
           <p class="name"><a href="{$bestgoods.url}" target="_blank" >{$bestgoods.name}</a></p>
-          <p class="price"><del style="color:#999">{$bestgoods.market_price}</del></p>
+          <p class="price disable-by-cy"><del style="color:#999">{$bestgoods.market_price}</del></p>
           <p><font class="price">{$bestgoods.shop_price}</font></p>
           <a class="j_AddCart" href="javascript:addToCart({$bestgoods.id})"></a> </li>
         {/foreach}

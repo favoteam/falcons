@@ -28,6 +28,7 @@
         <a href="user.php?act=my_comment" class="item {if $action eq 'my_comment'}curs{/if}"><span>{$lang.label_review}</span><i></i></a> 
         -->
 		<a href="user.php?act=collection_list" class="item {if $action eq 'collection_list'}curs{/if}"><span>{$lang.label_collection}</span><i></i></a> 
+        <a href="user.php?act=follow_shop" class="item {if $action eq 'follow_shop'}curs{/if}" title="Favorite Stores"><span>Favorite Stores</span><i></i></a>
         <!-- 
         <a href="user.php?act=follow_shop" class="item {if $action eq 'follow_shop'}curs{/if}" title="关注的店铺"><span>店铺关注</span><i></i></a> 
         <a href="user.php?act=auction_list" class="item {if $action eq 'auction_list'}curs{/if}"><span>我的竞拍</span><i></i></a> 

@@ -15,27 +15,50 @@
 <link rel="stylesheet" href="themes/cnpicks/css/brands.css">
 <link rel="stylesheet" href="themes/cnpicks/css/second.css">
 <link rel="stylesheet" href="themes/cnpicks/css/brandbar.css">
+<link rel="stylesheet" href="themes/cnpicks/css.css">
 <script type="text/javascript" src="themes/cnpicks/js/jquery-1.9.1.min.js"></script>
-{insert_scripts files='jquery-1.6.2.min.js'}
 {insert_scripts files='jquery.json.js,transport.js'}
 <script type="text/javascript" src="themes/cnpicks/js/jquery-lazyload.js" ></script>
+<script type="text/javascript" src="themes/cnpicks/js/main.js" ></script>
+<script type="text/javascript" src="themes/cnpicks/js/brand.js" ></script>
 
+<style type="text/css">
+.collect {
+  background: url(images/shengji_ad/goods_act.png) no-repeat 0 0;
+  background-position: -75px 4px;
+  border: 1px solid #c8c9cd;
+  display: inline-block;
+  font-size: 14px;
+  height: 34px;
+  line-height: 34px;
+  padding-left: 30px;
+  padding-right: 10px;
+  text-decoration: none;
+  width: auto;
+}
+</style>
 </head>
 <body>
 <div id="site-nav"> 
+  <!-- #BeginLibraryItem "/library/login.lbi" --><!-- #EndLibraryItem -->
   <!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+
   <div id="content">
     <div class="flow">
-
       <!-- #BeginLibraryItem "/library/brand_list.lbi" --><!-- #EndLibraryItem --> 
 	  <div class="blank5"></div>
 	  <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem --> 
     </div>
     <div class="blank5"></div>
   </div>
+  
+  
   <!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem --> 
   <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem --> 
-  <!-- #BeginLibraryItem "/library/site_bar.lbi" --><!-- #EndLibraryItem --> </div>
+  <!-- #BeginLibraryItem "/library/site_bar.lbi" --><!-- #EndLibraryItem --> 
+  
+  
+  </div>
 </body>
 <script type="text/javascript">
 

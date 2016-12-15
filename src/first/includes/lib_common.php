@@ -974,7 +974,7 @@ function load_config()
 function get_brand_list($t = false)
 // 代码修改_end_derek20150129admin_goods  www.68ecshop.com
 {
-    $sql = 'SELECT brand_id, brand_name, brand_name_cn FROM ' . $GLOBALS['ecs']->table('brand') . ' ORDER BY sort_order ASC, brand_id ASC';
+    $sql = 'SELECT brand_id, brand_name, brand_name_cn FROM ' . $GLOBALS['ecs']->table('brand') . ' WHERE is_delete!=1 ORDER BY sort_order ASC, brand_id ASC';
     $res = $GLOBALS['db']->getAll($sql);
 
     $brand_list = array();

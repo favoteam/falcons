@@ -841,4 +841,23 @@ function insert_history_1()
     $GLOBALS['smarty']->caching = $need_cache;
     return $output;
 }
+
+function insert_collect_btn($arr)
+{
+    $sql = 'SELECT count(*) FROM ' . $GLOBALS['ecs']->table('supplier_guanzhu') .
+           " WHERE userid = '" . $_SESSION['user_id'] . "' and supplierid=$arr[id]";
+    $number = $GLOBALS['db']->getOne($sql);
+	if(empty($_SESSION['user_id']))
+	{
+		return '<a href="javascript:openLogin()" class="collect">Favorite</a>';
+	}
+	elseif($number==0)
+	{
+        return '<a href="javascript:guanzhu1('.$arr['id'].')" class="collect">Favorite</a>';
+	}
+	else
+	{
+		return '<a href="javascript:cancel_fav('.$arr['id'].')" class="collect">Cancel Favorite</a>';
+	}
+}
 ?>

@@ -5,8 +5,8 @@
 <li><a class="sn-login" href="user.php?act=order_list" target="_top" rel="nofollow">Orders</a></li>
 <li><a class="sn-register" href="user.php?act=logout" target="_top">{$lang.user_logout}</a> </li>
 {else} 
-<a class="sn-login" href="user.php" target="_top">Sign in</a>
-<!-- <a class="sn-login" href="javascript:login_module();" target="_top">Sign in</a> -->
+<a class="sn-login" href="user.php" target="_top">{$lang.label_login}</a>
+<!-- <a class="sn-login" href="javascript:login_module();" target="_top">{$lang.label_login}</a> -->
 <a class="sn-register" href="register.php" target="_top">Register</a> 
 {/if}
 

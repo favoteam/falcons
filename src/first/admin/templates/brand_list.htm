@@ -29,7 +29,7 @@
 
   <table cellpadding="3" cellspacing="1">
     <tr>
-	  <th>id</th>
+	  <th><a href="javascript:listTable.sort('brand_id'); ">id</a></th>
       <th>{$lang.brand_name}</th>
 	  <th>{$lang.site_url}</th>
 
@@ -47,7 +47,7 @@
       <th><a href="javascript:listTable.sort('sold_num'); ">销量</a></th>
       <th><a href="javascript:listTable.sort('favorite_num'); ">{$lang.favorite_num}</a></th>
       <th><a href="javascript:listTable.sort('review_num'); ">{$lang.review_num}</a></th>
-      <th><a href="javascript:listTable.sort('shop_price'); ">更新日期</a></th>
+      <th><a href="javascript:listTable.sort('update_date'); ">更新日期</a></th>
       <th>{$lang.handler}</th>
     </tr>
     {foreach from=$brand_list item=brand}

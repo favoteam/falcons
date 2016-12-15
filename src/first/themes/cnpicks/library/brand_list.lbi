@@ -4,7 +4,8 @@
 	<div class="flow-item first"> 
       <div class="flow-content">
       	<p class="flow-title">
-			<a href="{$shop.url}" title="{$shop.supplier_title}"><span>{$shop.brand_name}</span></a>  
+			<a href="{$shop.url}" title="{$shop.supplier_title}"><span>{$shop.brand_name}</span></a> 
+            <span id="collect_brand_{$shop.brand_id}">{insert name=collect_btn id=$shop.brand_id}</span>
         </p>
 		<p class="flow-desc">
         	<a href="{$shop.url}" title="All items"><strong>{$shop.goods_number}</strong> items>></a>

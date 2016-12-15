@@ -773,6 +773,254 @@ elseif ($_REQUEST['step'] == 'drop_consignee')
         show_message($_LANG['not_fount_consignee']);
     }
 }
+/* 处理 ajax 的登录请求 */
+elseif ($_REQUEST['step'] == 'signup')
+{
+    include_once('includes/cls_json.php');
+	include_once(ROOT_PATH . 'includes/lib_passport.php');
+    $json = new JSON;
+
+    $username = !empty($_POST['username']) ? json_str_iconv(trim($_POST['username'])) : '';
+    $password = !empty($_POST['password']) ? trim($_POST['password']) : '';
+	$email    = isset($_POST['email']) ? trim($_POST['email']) : '';
+    $captcha = !empty($_POST['captcha']) ? json_str_iconv(trim($_POST['captcha'])) : '';
+    $result   = array('error' => 0, 'content' => '');
+	$other['mobile_phone'] = isset($_POST['extend_field5']) ? $_POST['extend_field5'] : '';
+	
+
+	/*if ((intval($_CFG['captcha']) & CAPTCHA_REGISTER) && gd_version() > 0)
+	{
+		if (empty($_POST['captcha']))
+		{
+			$result['error']   = 1;
+            $result['content'] = $_LANG['invalid_captcha'];
+            die($json->encode($result));
+		}
+
+		include_once('includes/cls_captcha.php');
+
+		$validator = new captcha();
+		if (!$validator->check_word($_POST['captcha']))
+		{
+			$result['error']   = 1;
+            $result['content'] = $_LANG['invalid_captcha'];
+            die($json->encode($result));
+		}
+	}*/
+	
+	
+	
+    
+	if(empty($_POST['agreement']))
+	{
+		$result['error']   = 1;
+		$result['content'] = $_LANG['passport_js']['agreement'];
+		die($json->encode($result));
+	}
+	
+	if (strlen($username) < 3)
+	{
+		$result['error']   = 1;
+		$result['content'] = $_LANG['passport_js']['username_shorter'];
+		die($json->encode($result));
+	}
+
+	if (strlen($password) < 6)
+	{
+		$result['error']   = 1;
+		$result['content'] = $_LANG['passport_js']['password_shorter'];
+		die($json->encode($result));
+	}
+
+	if (strpos($password, ' ') > 0)
+	{
+		$result['error']   = 1;
+		$result['content'] = $_LANG['passwd_balnk'];
+		die($json->encode($result));
+	}
+	 /* 检查username */
+    if (empty($username))
+    {
+        $result['error']   = 1;
+		$result['content'] = $GLOBALS['_LANG']['username_empty'];
+		die($json->encode($result));
+    }
+    else
+    {
+        if (preg_match('/\'\/^\\s*$|^c:\\\\con\\\\con$|[%,\\*\\"\\s\\t\\<\\>\\&\'\\\\]/', $username))
+        {
+            
+			$result['error']   = 1;
+			$result['content'] = sprintf($GLOBALS['_LANG']['username_invalid'], htmlspecialchars($username));
+			die($json->encode($result));
+        }
+    }
+	
+	
+    /* 检查email */
+    if (empty($email))
+    {
+        $result['error']   = 1;
+		$result['content'] = $GLOBALS['_LANG']['email_empty'];
+		die($json->encode($result));
+    }
+    else
+    {
+        if (!is_email($email))
+        {
+            $result['error']   = 1;
+			$result['content'] = sprintf($GLOBALS['_LANG']['email_invalid'], htmlspecialchars($email));
+			die($json->encode($result));
+        }
+    }
+	
+	/* 检查是否和管理员重名 */
+    if (admin_registered($username))
+    {
+		$result['error']   = 1;
+		$result['content'] = sprintf($GLOBALS['_LANG']['username_exist'], $username);
+		die($json->encode($result));
+    }
+	
+	if (!$GLOBALS['user']->add_user($username, $password, $email))
+    {
+        if ($GLOBALS['user']->error == ERR_INVALID_USERNAME)
+        {
+			$result['error']   = 1;
+			$result['content'] = sprintf($GLOBALS['_LANG']['username_invalid'], $username);
+			die($json->encode($result));
+        }
+        elseif ($GLOBALS['user']->error == ERR_USERNAME_NOT_ALLOW)
+        {
+            
+			$result['error']   = 1;
+			$result['content'] = sprintf($GLOBALS['_LANG']['username_not_allow'], $username);
+			die($json->encode($result));
+			
+        }
+        elseif ($GLOBALS['user']->error == ERR_USERNAME_EXISTS)
+        {
+            $result['error']   = 1;
+			$result['content'] = sprintf($GLOBALS['_LANG']['username_exist'], $username);
+			die($json->encode($result));
+        }
+        elseif ($GLOBALS['user']->error == ERR_INVALID_EMAIL)
+        {
+			$result['error']   = 1;
+			$result['content'] = sprintf($GLOBALS['_LANG']['email_invalid'], $email);
+			die($json->encode($result));
+		}
+        elseif ($GLOBALS['user']->error == ERR_EMAIL_NOT_ALLOW)
+        {
+            
+			$result['error']   = 1;
+			$result['content'] = sprintf($GLOBALS['_LANG']['email_not_allow'], $email);
+			die($json->encode($result));
+			
+        }
+        elseif ($GLOBALS['user']->error == ERR_EMAIL_EXISTS)
+        {
+            
+			$result['error']   = 1;
+			$result['content'] = sprintf($GLOBALS['_LANG']['email_exist'], $email);
+			die($json->encode($result));
+			
+        }
+        else
+        {
+		    $result['error']   = 1;
+		    $result['content'] = 'UNKNOWN ERROR!';
+			die($json->encode($result));
+        }
+
+        //注册失败
+    }
+	
+	else
+    {
+		
+		//$sql = 'UPDATE '. $GLOBALS['ecs']->table('users') . ' SET parent_id = ' . $up_uid . " WHERE user_id ='".$username."'";
+        
+		//注册成功
+        /* 设置成登录状态 */
+        $GLOBALS['user']->set_session($username);
+        $GLOBALS['user']->set_cookie($username);
+
+        /* 注册送积分 */
+        if (!empty($GLOBALS['_CFG']['register_points']))
+        {
+            log_account_change($_SESSION['user_id'], 0, 0, $GLOBALS['_CFG']['register_points'], $GLOBALS['_CFG']['register_points'], $GLOBALS['_LANG']['register_points']);
+        }
+
+        /*推荐处理*/
+        $affiliate  = unserialize($GLOBALS['_CFG']['affiliate']);
+        if (isset($affiliate['on']) && $affiliate['on'] == 1)
+        {
+            // 推荐开关开启
+            $up_uid     = get_affiliate();
+            empty($affiliate) && $affiliate = array();
+            $affiliate['config']['level_register_all'] = intval($affiliate['config']['level_register_all']);
+            $affiliate['config']['level_register_up'] = intval($affiliate['config']['level_register_up']);
+            if ($up_uid)
+            {
+                if (!empty($affiliate['config']['level_register_all']))
+                {
+                    if (!empty($affiliate['config']['level_register_up']))
+                    {
+                        $rank_points = $GLOBALS['db']->getOne("SELECT rank_points FROM " . $GLOBALS['ecs']->table('users') . " WHERE user_id = '$up_uid'");
+                        if ($rank_points + $affiliate['config']['level_register_all'] <= $affiliate['config']['level_register_up'])
+                        {
+                            log_account_change($up_uid, 0, 0, $affiliate['config']['level_register_all'], 0, sprintf($GLOBALS['_LANG']['register_affiliate'], $_SESSION['user_id'], $username));
+                        }
+                    }
+                    else
+                    {
+                        log_account_change($up_uid, 0, 0, $affiliate['config']['level_register_all'], 0, $GLOBALS['_LANG']['register_affiliate']);
+                    }
+                }
+
+                //设置推荐人
+                $sql = 'UPDATE '. $GLOBALS['ecs']->table('users') . ' SET parent_id = ' . $up_uid . ' WHERE user_id = ' . $_SESSION['user_id'];
+
+                $GLOBALS['db']->query($sql);
+            }
+        }
+
+        //定义other合法的变量数组
+        $other_key_array = array('msn', 'qq', 'office_phone', 'home_phone', 'mobile_phone');
+        $update_data['reg_time'] = local_strtotime(local_date('Y-m-d H:i:s'));
+        if ($other)
+        {
+            foreach ($other as $key=>$val)
+            {
+                //删除非法key值
+                if (!in_array($key, $other_key_array))
+                {
+                    unset($other[$key]);
+                }
+                else
+                {
+                    $other[$key] =  htmlspecialchars(trim($val)); //防止用户输入javascript代码
+                }
+            }
+            $update_data = array_merge($update_data, $other);
+        }
+        $GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('users'), $update_data, 'UPDATE', 'user_id = ' . $_SESSION['user_id']);
+
+        update_user_info();      // 更新用户信息
+        recalculate_price();     // 重新计算购物车中的商品价格
+		
+		$ucdata = empty($user->ucdata)? "" : $user->ucdata;
+
+        $result['error']   = 0;
+		$result['content'] = $smarty->fetch('library/member_info.lbi');
+		die($json->encode($result));
+    }
+	
+
+
+    die($json->encode($result));
+}
 elseif ($_REQUEST['step'] == 'checkout')
 {
     /*------------------------------------------------------ */

@@ -117,7 +117,7 @@
                 <a id="collect_{$goods.goods_id}" href="javascript:collect_goods_list({$goods.goods_id});" class="collet-btn"></a>
                 {/if}
               {else}
-                <a href="user.php" class="collet-btn{if $goods.is_collet eq 1} collet-btn-t{/if}"></a>
+                <a href="javascript:openLogin()" class="collet-btn{if $goods.is_collet eq 1} collet-btn-t{/if}"></a>
               {/if}
               
 			  </div>

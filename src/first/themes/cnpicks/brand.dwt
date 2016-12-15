@@ -13,11 +13,13 @@
 <link rel="shortcut icon" href="favicon.ico" />
 <link rel="icon" href="animated_favicon.gif" type="image/gif" />
 <script type="text/javascript" src="themes/cnpicks/js/common_www_ecshop68_com.js" ></script>
-<script type="text/javascript" src="themes/cnpicks/js/jquery-1.7.2_www_ecshop68_com.js" ></script>
+<script type="text/javascript" src="themes/cnpicks/js/jquery-1.9.1.min.js"></script>
 {* 包含脚本文件 *}
 {insert_scripts files='common.js,global.js,compare.js'}
 <script>var jdpts = new Object(); jdpts._st = new Date().getTime();</script>
 <link rel="stylesheet" type="text/css" href="themes/cnpicks/css/category.css" />
+<link rel="stylesheet" href="themes/cnpicks/css.css">
+
 <style>
 /*------商品筛选------*/
 
@@ -47,13 +49,32 @@
 	clear: both;
 	visibility: hidden;
 }
+.collect {
+  background: url(images/shengji_ad/goods_act.png) no-repeat 0 0;
+  background-position: -75px 4px;
+  border: 1px solid #c8c9cd;
+  display: inline-block;
+  font-size: 14px;
+  height: 34px;
+  line-height: 34px;
+  padding-left: 30px;
+  padding-right: 10px;
+  text-decoration: none;
+  width: auto;
+}
+
+
 </style>
 </head><body>
 <script src="themes/cnpicks/js/jquery_006.js"></script> 
 <script src="themes/cnpicks/js/search_goods.js"></script> 
 <script type="text/javascript" src="themes/cnpicks/js/jquery-lazyload.js" ></script> 
+<script type="text/javascript" src="themes/cnpicks/js/brand.js" ></script>
+<script type="text/javascript" src="themes/cnpicks/js/main.js" ></script>
 {insert_scripts files='jquery.json.js,transport.js'}
 <div id="site-nav"> 
+  <!-- #BeginLibraryItem "/library/login.lbi" --><!-- #EndLibraryItem -->
+
   <!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
   <div class="blank"></div>
   <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
@@ -61,6 +82,11 @@
     <div class="">
 	<div class="brand-name">
 		{$brand.brand_name}
+        
+        
+        <span id="collect_brand_{$brand.brand_id}">{insert name=collect_btn id=$brand.brand_id}</span>
+        
+        
 	</div>
       <div class="box disable-by-cy">
         <div class="boxCenterList">

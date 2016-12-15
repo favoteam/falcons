@@ -52,7 +52,7 @@ label .error{
 				<div id="login-box" class="uc_box uc_box_reg">
                 	
 					<form action="register.php" method="post" id="formUser" name="formUser" >
-						<h2><span>Have a account? <a href="user.php?act=login&back_act={$back_act}">Sign in</a></span></h2>
+						<h2><span>Have a account? <a href="user.php?act=login&back_act={$back_act}">{$lang.label_login}</a></span></h2>
 
 						<div class="form">
 						
