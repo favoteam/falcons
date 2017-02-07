@@ -1,0 +1,41 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $category_related_brand_goods} -->
+<div class="clearfix"></div> 
+<div class="brands_goods_list">
+	<div class="brands_goods_title">
+		<a href="{$goods.goods_brand_url}" >
+			<span style="font-size: 20px;font-weight: 500;padding:20px 0px 10px 0px;">{$goods.goods_brand}</span>
+			<span style="display:none"><img title="{$goods.goods_brand}" alt="" data-original="data/brandlogo/{$goods.brand_logo}" src="data/brandlogo/{$goods.brand_logo}" width="120" ></span>
+		</a>
+    </div>
+    <div class="colList">    
+      <div class="slider1 colFrame" >
+		<ul>
+      	<!--{foreach from=$category_related_brand_goods key=key item=goods name=best_goods}-->
+      	<li <!--{if $key%2 eq 0}-->style=""<!--{/if}-->>
+            	<div class="p-img"><a href="{$goods.url}" title="{$goods.name}"><img alt="{$goods.name}"  src="{$goods.goods_thumb}"/></a></div>
+                <div class="rain-product-info">
+            	<div class="p-price"><strong class="best_goods_price"> 
+              	<!-- {if $goods.promote_price neq 0} --> 
+              	{$goods.formated_promote_price} 
+              	<!-- {else}--> 
+              	{$goods.shop_price} 
+              	<!--{/if}--> 
+              	</strong>
+                </div>
+                <div class="rate"><a href="{$goods.url}" title="{$goods.name}">{$goods.name|truncate:12}</a></div>
+                </div>
+            </li>
+      	<!--{/foreach}-->
+    	</ul>
+      </div>
+
+    </div>
+	
+	<div class="brands_goods_title">
+		<a href="{$goods.goods_brand_url}" >
+			<span style="font-size: 20px;font-weight: 500;padding:10px 0px 30px 0px;">More {$goods.goods_brand} Products</span>
+		</a>
+	</div>
+</div>
+<!--{/if}--> 

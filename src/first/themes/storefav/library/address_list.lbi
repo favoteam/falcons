@@ -1,0 +1,155 @@
+{if $consignee_list}
+<ul class="payment_tab_jm">
+<!-- {foreach from=$consignee_list item=consignee key=sn} -->
+        <li {if $consignee.def_addr eq 1}class="seled"{/if}>
+           <div class="address-item" onclick="selAddress(this, {$consignee.address_id});">
+           <input name="address3" value="{$consignee.address_id}" {if $consignee.def_addr eq 1} checked{/if} type="radio">
+           
+           {$consignee.consignee|escape} {$consignee.last_name|escape}, {$consignee.address|escape}, {$consignee.address1|escape}, {$consignee.city|escape}, {$consignee.province|escape}, {$consignee.zipcode|escape}, {$consignee.country|escape}{if $consignee.tel}{$consignee.tel}, {/if}{if $consignee.mobile}, {$consignee.mobile|escape}{/if}</div>
+           
+           <div  class="edit_addr" id="address_edit_{$sn}"><a  href="javascript:AddressEdit({$consignee.address_id});">{$lang.edit}</a> <a  href="javascript:del_Address({$consignee.address_id});" onclick="return confirm('{$lang.drop_consignee_confirm}');">{$lang.drop}</a></div>
+           
+        </li>
+      <!-- {/foreach} -->
+</ul>
+<div class="blank10"></div>
+<div class="address_jm_add" onclick="AddressEdit(0);">{$lang.new_consignee_address}</div>
+{else}
+<div class="blank10"></div>
+<table cellpadding=4 cellspacing=4 width="100%">
+  <tr>
+    <td width="150" align="left">{$lang.consignee_name}</td>
+    <td>
+      <input type="text" name="consignee" onchange="checkConsigneeName(this,'consignee_name_notice')" class="input_addr2">
+	  <font color="#ff3300">*</font>
+    </td>
+    <td align="left">
+      <div class="verify_tips">
+        <span class="label" id="consignee_name_notice"></span>
+      </div>
+    </td>
+  </tr>
+  <tr><td style="height:3px;"></td></tr>
+  <tr>
+    <td align="left">Gender</td>
+    <td>
+      <input type="radio" name="sex" value="1" checked="checked" class="addtotable_m">Ms.&nbsp;&nbsp; 
+      <input type="radio" name="sex" value="0" class="addtotable_m">Mr.&nbsp;&nbsp; 
+	  <font color="#ff3300">*</font>
+    </td>
+    <td></td>
+  </tr>
+  <tr><td style="height:3px;"></td></tr>
+  <tr>
+    <td align="left">Country</td>
+    <td>
+      <select name="country" class="input_addr2 input_addr2_t" onchange="region.changed(this, 1, 'selProvinces')">
+        <option value="">{$lang.please_select}</option>
+        <!-- {foreach from=$shop_country_list item=country} -->
+        <option value="{$country.region_id}" {if $address.province eq $country.region_id}selected{/if}>{$country.region_name}</option>
+        <!-- {/foreach} -->
+      </select>
+	  <font color="#ff3300">*</font>
+    </td>
+    <td align="left">
+      <div class="verify_tips">
+        <span class="label" id="country_notice"></span>
+      </div>
+    </td>
+  </tr>
+  
+  
+  <tr><td style="height:3px;"></td></tr>
+  <tr>
+    <td align="left">{$lang.state_province}</td>
+    <td>
+       <select name="province" id="selProvinces" class="input_addr2 input_addr2_t" >
+        <option value="0">{$lang.please_select}{$name_of_region[1]}</option>
+        <!-- {foreach from=$province_list item=province} -->
+        <option value="{$province.region_id}" {if $consignee.province eq $province.region_id}selected{/if}>{$province.region_name}</option>
+        <!-- {/foreach} -->
+      </select>
+    </td>
+    <td align="left">
+      <div class="verify_tips">
+        <span class="label" id="province_notice"></span>
+      </div>
+    </td>
+  </tr>
+  
+  
+  
+  <tr><td style="height:3px;"></td></tr>
+  <tr>
+    <td align="left">{$lang.city_district}</td>
+    <td>
+      <input type="text" name="city" class="input_addr2" onchange="checkCity(this,'city_notice')">
+	  <font color="#ff3300">*</font>
+    </td>
+    <td align="left">
+      <div class="verify_tips">
+        <span class="label" id="city_notice"></span>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left;">Address line 1：</td>
+    <td>
+      <input type="text" name="address" value="{$address.address}" onchange="checkAddress(this,'address_notice')" class="input_addr2">
+	  <span class="input_necessary"> * </span>
+    </td>
+    <td>
+      <div class="verify_tips">
+        <span class="label" id="address_notice"></span>
+      </div>
+    </td>
+  </tr>
+  
+  <tr>
+    <td style="text-align:left;">Address line 2：</td>
+    <td>
+      <input type="text" name="address1" value="{$address.address1}" onchange="checkAddress(this,'address_notice1')" class="input_addr2">
+	  <font class="input_necessary"></font>
+    </td>
+    <td>
+      <div class="verify_tips">
+        <span class="label" id="address_notice1"></span>
+      </div>
+    </td>
+  </tr>
+  <tr><td style="height:3px;"></td></tr>
+  <tr>
+    <td align="left">{$lang.postalcode}</td>
+    <td>
+		<input type="text" name="zipcode" class="input_addr2" onchange="checkZipcode(this,'zipcode_notice')">
+		<font class="input_necessary">*</font>
+	</td>
+    <td align="left">
+      <div class="verify_tips">
+        <span class="label" id="zipcode_notice"></span>
+      </div>
+    </td>
+  </tr>
+  <tr><td style="height:3px;"></td></tr>
+  <tr>
+    <td align="left">{$lang.mobile}</td>
+    <td>
+		<input type="text" name="mobile" class="input_addr2 input_addr2_t" onchange="checkMobile(this,'mobile_notice')">
+		<font class="input_necessary">*</font>
+	</td>
+    <td align="left">
+      <div class="verify_tips">
+        <span class="label" id="mobile_notice"></span>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td></td><td style="padding-top:20px;">
+    <input type="hidden" name="address_id" value="0" >
+    <input type="hidden" name="shipping_bian" value="1" >
+    <input type="hidden" name="closediv" value="0" >
+    <input type="button" class="BonusButton" value=" {$lang.button_submit} " onclick="submitAddress()"></td>
+  </tr>
+</table>
+
+{/if}

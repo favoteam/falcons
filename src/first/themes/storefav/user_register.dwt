@@ -1,0 +1,344 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link rel="stylesheet" type="text/css" href="themes/storefav/css/commin.css" />
+<link type="text/css" rel="stylesheet" href="themes/storefav/css/passport.css" />
+<script type="text/javascript" src="themes/storefav/js/jquery_email.js"></script>
+<script type="text/javascript" src="themes/storefav/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="themes/storefav/js/validate/jquery.validate.js"></script>
+<script type="text/javascript" src="themes/storefav/js/validate/messages_zh.js"></script>
+<script type="text/javascript" src="themes/storefav/js/placeholder.js" ></script>
+{insert_scripts files='jquery.json.js,transport.js'} 
+{* 包含脚本文件 *} 
+{insert_scripts files='common.js,register.js'}
+<style type="css/text">
+label .error{
+	color: #900;
+}
+</style>
+</head>
+<body>
+
+	<div class="Logo-r">
+		<div class="Logo-info-r">
+			<a href="./" class="logo"></a>
+            <span class="register disable-by-cy">Register</span>
+			<!-- #BeginLibraryItem "/library/user_right.lbi" --><!-- #EndLibraryItem -->
+		</div>
+	</div>
+	<div class="w">
+		<!-- {if $shop_reg_closed eq 1} -->
+		<div class="usBox">
+			<div class="usBox_2 clearfix">
+				<div class="f1 f5" align="center">{$lang.shop_register_closed}</div>
+			</div>
+		</div>
+		<!-- {else} -->
+		{insert_scripts files='utils.js'}
+		<div class="w" id="regist">
+			<div class="mcon register_con">
+				<div id="reg-pic" class="box-pic box-pic1" style="display:none;"></div>
+				<div id="login-box" class="uc_box uc_box_reg">
+                	
+					<form action="register.php" method="post" id="formUser" name="formUser" >
+						<h2><span>Have a account? <a href="user.php?act=login&back_act={$back_act}">{$lang.label_login}</a></span></h2>
+
+						<div class="form">
+						
+						<input type="hidden" name="register_type" value="{$register_type}" />
+							
+							<div class="item">
+								<input name="username" type="text" id="username" placeholder="{$lang.label_username}" onblur="checkUsername(this)" class="text username" />
+								<i class="i-name"></i>
+								<div style="">
+									<span class="label" id="username_notice"></span>
+								</div>
+							</div>
+
+							<div class="item" style="">
+								<input name="email" type="text" id="email" placeholder="{$lang.label_email}" onblur="checkEmail(this)" class="text email" />
+								<i class="i-email"></i>
+								<div style="">
+									<span class="label" id="email_notice"></span>
+								</div>
+							</div>
+							
+							<div id="o-password">
+								<div class="item" style="">
+									<input name="password" type="password" id="password" placeholder="{$lang.label_password}" onblur="check_password(this.value);" onkeyup="checkIntensity(this.value)" class="text" />
+									<i class="i-pass"></i>
+									<div id="pwd_notice" style="display:none;">
+										<span class="label" id="password_notice"></span>
+									</div>
+									<div id="pwd_intensity" >
+										<span class="label">
+										<table width="295" height="25px" border="0" cellspacing="0" cellpadding="0" style="padding: 0px 0px 10px;">
+											<tr align="center">
+												<td width="33%" id="pwd_lower">{$lang.pwd_lower}</td>
+												<td width="33%" id="pwd_middle">{$lang.pwd_middle}</td>
+												<td width="33%" id="pwd_high">{$lang.pwd_high}</td>
+											</tr>
+										</table>
+										</span>
+									</div>
+								</div>
+								<div class="item" style="">
+									<input type="password" id="conform_password" name="confirm_password" class="text" placeholder="{$lang.label_confirm_password}" onblur="check_conform_password(this.value);" autocomplete="off" />
+									<i class="i-pass"></i>
+									<div style="">
+										<span class="label" id="conform_password_notice"></span>
+									</div>
+								</div>
+							</div>
+							
+							<!-- {foreach from=$extend_info_list item=field} -->
+							<!-- {if $field.id eq 6} -->
+							<div class="item">
+								<select name='sel_question' style="width: 247px; height: 36px; line-height: 36px;">
+									<option value='0'>{$lang.sel_question}</option>
+									{html_options options=$passwd_questions}
+								</select>
+							</div>
+							<div class="item" style="margin-top: 30px; *margin-top: 15px;">
+								<input name="passwd_answer" type="text" class="text" placeholder="{$lang.passwd_answer}" />
+								<i class="i-pass"></i>
+								<div style="display:none;">
+									<span class="label" {if $field.is_need}id="passwd_quesetion"{/if}></span>
+								</div>
+							</div>
+							<!-- {elseif $field.reg_field_name != '验证手机'} -->
+							<div class="item">
+								<input name="extend_field{$field.id}" id="extend_field{$field.id}" type="text" class="text" placeholder="{$field.reg_field_name}" />
+								<i class="{if $field.id eq 1}i-msn{elseif $field.id eq 2}i-qq{elseif $field.id eq 3}i-bgphone{elseif $field.id eq 4}i-jtphone{elseif $field.id eq 5}i-phone{else}i-phone{/if}"></i>
+								<div style="display:none;">
+									<span class="label" {if $field.is_need}id="extend_field{$field.id}i"{/if}></span>
+								</div>
+							</div>
+							<!-- {/if} -->
+							<!--{/foreach}-->
+							
+							<!-- 判断是否启用验证码{if $enabled_captcha} -->
+							<div class="item">
+								<input type="text" id="captcha" size="8" name="captcha" class="text-1" placeholder="{$lang.comment_captcha}" style="ime-mode: disabled" autocomplete="off" MaxLength="6" />
+								<label class="img" style="margin-left: 5px">
+									<img src="captcha.php?{$rand}" alt="captcha" style="vertical-align: middle; cursor: pointer;" onClick="this.src='captcha.php?'+Math.random()" />
+								</label>
+							</div>
+							<!--{/if}-->
+							
+							<div class="item item_t">
+								<div class="safety">
+									<input name="agreement" type="checkbox" value="1" checked="checked" class="checkbox" />
+									<label for="remember" class="mar-b">{$lang.agreement}</label>
+								</div>
+							</div>
+							<div class="item">
+								<input name="act" type="hidden" value="register">
+								<input type="hidden" name="back_act" value="{$back_act}" />
+								<input type="button" id="btn_submit" onclick="register()" name="Submit" class="btn-img btn-regist" value="Register" />
+							</div>
+						</div>
+					</form>
+					<!--[if !ie]>form end<![endif]-->
+					<!-- 代码直接替换form表单2014-12-23 by www.68ecshop.com  _end -->
+				</div>
+			</div>
+		</div>
+<script>
+function register()
+{
+
+  var frm  = document.forms['formUser'];
+  var username  = Utils.trim(frm.elements['username'].value);
+  var email  = frm.elements['email'].value;
+  var password  = Utils.trim(frm.elements['password'].value);
+  var confirm_password = Utils.trim(frm.elements['confirm_password'].value);
+  var checked_agreement = frm.elements['agreement'].checked;
+  var msn = frm.elements['extend_field1'] ? Utils.trim(frm.elements['extend_field1'].value) : '';
+  var qq = frm.elements['extend_field2'] ? Utils.trim(frm.elements['extend_field2'].value) : '';
+  var home_phone = frm.elements['extend_field4'] ? Utils.trim(frm.elements['extend_field4'].value) : '';
+  var office_phone = frm.elements['extend_field3'] ? Utils.trim(frm.elements['extend_field3'].value) : '';
+  var mobile_phone = frm.elements['mobile'] ? Utils.trim(frm.elements['mobile'].value) : '';
+  var passwd_answer = frm.elements['passwd_answer'] ? Utils.trim(frm.elements['passwd_answer'].value) : '';
+  var sel_question =  frm.elements['sel_question'] ? Utils.trim(frm.elements['sel_question'].value) : '';
+  var reg_type =  frm.elements['reg_type'] ? Utils.trim(frm.elements['reg_type'].value) : 0;
+  var captcha =  frm.elements['captcha'] ? Utils.trim(frm.elements['captcha'].value) : 0;
+  
+
+  var msg = "";
+  // 检查输入
+  var msg = '';
+  if (username.length == 0)
+  {
+    msg += username_empty + '\n';
+  }
+  else if (username.match(/^\s*$|^c:\\con\\con$|[%,\'\*\"\s\t\<\>\&\\]/))
+  {
+    msg += username_invalid + '\n';
+  }
+  else if (username.length < 3)
+  {
+    msg += username_shorter + '\n';
+  }
+
+  if(reg_type==0)
+  {
+	if (email.length == 0)
+	{
+	  msg += email_empty + '\n';
+	}
+	else
+	{
+	  if ( ! (Utils.isEmail(email)))
+	  {
+		msg += email_invalid + '\n';
+	  }
+	}
+  }
+  
+  
+  if (password.length == 0)
+  {
+    msg += password_empty + '\n';
+  }
+  else if (password.length < 6)
+  {
+    msg += password_shorter + '\n';
+  }
+  if (/ /.test(password) == true)
+  {
+	msg += passwd_balnk + '\n';
+  }
+
+ 
+  
+  if (confirm_password != password )
+  {
+    msg += confirm_password_invalid + '\n';
+  }
+  if(checked_agreement != true)
+  {
+    msg += agreement + '\n';
+  }
+
+  if (msn.length > 0 && (!Utils.isEmail(msn)))
+  {
+    msg += msn_invalid + '\n';
+  }
+
+  if (qq.length > 0 && (!Utils.isNumber(qq)))
+  {
+    msg += qq_invalid + '\n';
+  }
+
+  if (office_phone.length>0)
+  {
+    var reg = /^[\d|\-|\s]+$/;
+    if (!reg.test(office_phone))
+    {
+      msg += office_phone_invalid + '\n';
+    }
+  }
+  if (home_phone.length>0)
+  {
+    var reg = /^[\d|\-|\s]+$/;
+
+    if (!reg.test(home_phone))
+    {
+      msg += home_phone_invalid + '\n';
+    }
+  }
+  
+  
+
+  if (msg.length > 0)
+  {
+    alert(msg);
+    return;
+  }
+  
+  var params=$('#formUser').serialize()
+  $.ajax({
+			url:"register.php",
+			dataType:'json',
+			type:"POST",
+			data:params,
+			beforeSend:function() {  
+			   $('#register_btn').val('Loading...').attr('disabled',true);
+			},  
+			complete:function(result) {  
+			   
+			},  
+			success:function(result){
+				if(result.err_no==0)
+				{
+				   window.location.href=result.back_act;
+				   return;
+				}
+				else
+				{
+				   $('#register_btn').val('Register').attr('disabled',false);
+				   alert(result.err_msg);	
+				   return;
+				}
+			},
+			error:function(){
+				$('#register_btn').val('Register').attr('disabled',false);
+			}
+	});
+	 
+
+}
+		</script>
+		<!--{/if}-->
+		<!--#会员注册界面 end-->
+		<div class="blank"></div>
+	</div>
+	<!-- #BeginLibraryItem "/library/page_footer.lbi" -->
+	<!-- #EndLibraryItem -->
+	<script type="text/javascript">
+	var process_request = "{$lang.process_request}";
+	{foreach from=$lang.passport_js item=item key=key}
+	var {$key} = "{$item}";
+	{/foreach}
+	var username_exist = "{$lang.username_exist}";
+	
+	$().ready(function(){
+		//设置高度
+		//$(".mcon").height($(".uc_box").height());
+		
+		$("#formUser").submit(function(){
+			return register('{$register_type}');
+		});
+				
+		$("#zemail").click(function(){
+			sendEmailCode($("#email"), $("#email_code"), $(this));
+		});
+		
+		$("#zphone").click(function(){
+			sendMobileCode($("#mobile_phone"), $("#mobile_code"), $(this));
+		});
+		
+		
+		$(".register_tab").find(".cur").removeClass("cur");
+		$("#li_register_type_{$register_type}").addClass("cur");
+		$(".tab_item").click(function(){
+			var register_type = $(this).attr("register_type");
+			$("#register_type").val(register_type);
+			$("#formRegister").submit();
+		});
+	});
+</script>
+</body>
+</html>

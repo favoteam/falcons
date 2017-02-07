@@ -1,0 +1,38 @@
+<div class="overlay-content">
+    <ul class="tabs clear">
+        <li class="first"><a id="register-tab" href="#">
+            Register
+        </a></li>
+        <li class="active"><a id="sign-in-tab" href="#">{$lang.label_login}</a></li>
+    </ul>
+    <div class="overlay-body clear">
+        <div id="sign-in-tab-content">
+            <form>
+                <div>
+                    <label for="username-existing">Email or Username</label>
+                    <span class="inline-input-error-message" id="username-existing-error" style="display: none;">
+                                </span>
+                    <input type="text" autocorrect="off" autocapitalize="off" class="text" name="username" id="username-existing" tabindex="1">
+                </div>
+                <div>
+                    <label for="password-existing">Password</label>
+                    <span class="inline-input-error-message" id="password-existing-error">
+                                </span>
+                    <input type="password" class="text" name="password" id="password-existing" tabindex="2">
+                </div>
+                <div class="inline-group">
+                    <input id="persistent" type="checkbox" name="persistent" value="1" tabindex="3" checked="checked">
+                    <label for="persistent">Stay signed in</label>
+                </div>
+                <p class="last clear submit">
+                    <input type="hidden" name="from_page" value="https://www.etsy.com/">
+                    <input type="hidden" name="from_action" value="signin-header">
+                    <input type="hidden" class="hidden" name="from_overlay" value="1">
+                    <input type="hidden" name="_nnc" value="3:1450402309:JSFkGU41xCd-yv8Cc0vSVBUwvCvm:9b18bae865b0923d593a4b63727e98c728fcec5bfca08631757345acbafa4f87" class="hidden csrf">
+                            <input type="submit" class="btn-primary submit-button" id="signin-button" data-default-text="{$lang.label_login}" value="{$lang.label_login}" tabindex="4">
+                    <span class="spinner-small spinner-small-inline"></span>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>

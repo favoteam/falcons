@@ -1,0 +1,19 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $pictures}-->
+
+  <div class="gallery">
+    <div id="demo">
+      <div id="demo1">
+        <ul id="goods_gallery">
+          <!-- {foreach from=$pictures item=picture}-->
+          <li>
+	           <img src="{if $picture.thumb_url}{$picture.img_url}{else}{$picture.img_url}{/if}" alt="{$goods.goods_name}" class="B_blue" onclick="change_img(this.src)" />
+          </li>
+          <!--{/foreach}-->
+        </ul>
+      </div>
+      <div id="demo2" style="display:inline; overflow:visible;"></div>
+    </div>
+  </div>
+  
+<!-- {/if}-->

@@ -1,0 +1,137 @@
+<table cellpadding=4 cellspacing=4 width="100%" style="clear:both;margin-top:20px;">
+  <tr>
+    <td style="text-align:left;width:30%">
+     {$lang.first_name}:
+    </td>
+    <td>
+      <input type="text" name="consignee" value="{$address.consignee}" onblur="checkConsigneeName(this,'consignee_name_notice')" class="input_addr2">
+      <span class="input_necessary"> * </span>
+	</td>
+    <td>
+      <div class="verify_tips">
+        <span class="label" id="consignee_name_notice"></span>
+      </div>
+    </td>
+  </tr>
+  
+  <tr>
+    <td style="text-align:left;width:30%">
+      {$lang.last_name}:
+    </td>
+    <td>
+      <input type="text" name="last_name" value="{$address.last_name}" onblur="checkLastName(this,'last_name_notice')" class="input_addr2">
+      <span class="input_necessary"> * </span>
+	</td>
+    <td>
+      <div class="verify_tips">
+        <span class="label" id="last_name_notice"></span>
+      </div>
+    </td>
+  </tr>
+  
+  <tr>
+    <td style="text-align:left;">Address line 1：</td>
+    <td>
+      <input type="text" name="address" value="{$address.address}" onblur="checkAddress(this,'address_notice')" class="input_addr2">
+	  <span class="input_necessary"> * </span>
+    </td>
+    <td>
+      <div class="verify_tips">
+        <span class="label" id="address_notice"></span>
+      </div>
+    </td>
+  </tr>
+  
+  <tr>
+    <td style="text-align:left;">Address line 2：</td>
+    <td>
+      <input type="text" name="address1" value="{$address.address1}" onblur="checkAddress(this,'address_notice1')" class="input_addr2">
+	  <font class="input_necessary"></font>
+    </td>
+    <td>
+      <div class="verify_tips">
+        <span class="label" id="address_notice1"></span>
+      </div>
+    </td>
+  </tr>
+  
+  <tr>
+    <td style="text-align:left;">{$lang.country}</td>
+    <td>
+      <select name="country" class="input_addr2 " onblur="region.changed(this, 1, 'selProvinces');checkCountry(this,'country_notice')">
+        <option value="">{$lang.please_select}</option>
+        <!-- {foreach from=$shop_country_list item=country} -->
+        <option value="{$country.region_id}" {if $country.region_id eq $address.country}selected{/if}>{$country.region_name}</option>
+        <!-- {/foreach} -->
+      </select>
+	  <span class="input_necessary"> * </span>
+    </td>
+    <td>
+      <div class="verify_tips">
+        <span class="label" id="country_notice"></span>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left;">{$lang.state_province}</td>
+    <td>
+       <select name="province" id="selProvinces" class="input_addr2 " onblur="checkProvince(this,'province_notice')">
+        <option value="">{$lang.please_select}{$name_of_region[1]}</option>
+        <!-- {foreach from=$province_list item=province} -->
+        <option value="{$province.region_id}" {if $address.province eq $province.region_id}selected{/if}>{$province.region_name}</option>
+        <!-- {/foreach} -->
+      </select>
+	  <span class="input_necessary"> * </span>
+    </td>
+    <td>
+      <div class="verify_tips">
+        <span class="label" id="province_notice"></span>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left;">{$lang.city_district}</td>
+    <td>
+      <input type="text" name="city" value="{$address.city}" onblur="checkCity(this,'city_notice')" class="input_addr2">
+	  <span class="input_necessary"> * </span>
+    </td>
+    <td>
+      <div class="verify_tips">
+        <span class="label" id="city_notice"></span>
+      </div>
+    </td>
+  </tr>
+  
+  
+  <tr>
+    <td style="text-align:left;">{$lang.postalcode}</td>
+    <td>
+      <input type="text" name="zipcode" class="input_addr2" value="{$address.zipcode}" onblur="checkZipcode(this,'zipcode_notice')">
+	  <span class="input_necessary"> * </span>
+    </td>
+    <td>
+      <div class="verify_tips">
+        <span class="label" id="zipcode_notice"></span>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left;">{$lang.mobile}</td>
+    <td>
+      <input type="text" name="mobile" class="input_addr2 " onblur="checkMobile(this,'mobile_notice')" value="{$address.mobile}">
+      <span class="input_necessary"> * </span>
+	</td>
+    <td>
+      <div class="verify_tips">
+        <span class="label" id="mobile_notice"></span>
+      </div>
+    </td>
+  </tr>
+  <!-- <tr><td></td><td><font color=#cccccc>At least one</font></td></tr> -->
+  <tr><td></td><td style="padding-top:10px;">
+  <input type="hidden" name="address_id" value="{$address.address_id}" >
+  <input type="hidden" name="shipping_bian" value="0" >
+  <input type="hidden" name="closediv" value="1" >
+  <input type="button" class="BonusButton" value=" {$lang.button_submit} " onclick="submitAddress()">&nbsp;&nbsp;
+  <input type="button" class="Button_reset" value=" Cancel " onclick="closePopDiv()"></td></tr>
+</table>

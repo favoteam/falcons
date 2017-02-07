@@ -1,0 +1,35 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+{if $user_info}
+
+<li><a class="sn-login" href="user.php?act=follow_shop" target="_top" rel="nofollow">Favorites</a> </li>
+<li><a class="sn-login" href="user.php?act=profile" target="_top">{$user_info.username} </a></li>
+<li><a class="sn-register" href="user.php?act=logout" target="_top">{$lang.user_logout}</a> </li>
+{else} 
+<a class="sn-login" href="user.php" target="_top">{$lang.label_login}</a>
+<!-- <a class="sn-login" href="javascript:login_module();" target="_top">{$lang.label_login}</a> -->
+<a class="sn-register" href="register.php" target="_top">Register</a> 
+{/if}
+
+<script type="text/javascript">
+	function login_module(){//点击登录时，调用的函数
+		var mengban=document.getElementById("mengban");
+		mengban.className="mengban";
+		var height = document.body.scrollHeight;
+		mengban.style.height = height+"px";
+		console.log(height);
+		var divs=document.getElementById("login_module");
+		divs.style.display="block";
+	}
+	function close_login(){//关闭弹窗时，调用的函数
+		var mengban=document.getElementByIdx_x("mengban");
+		mengban.className=" ";
+		document.getElementByIdx_x("login_module").style.display = "none";
+		document.getElementByIdx_x("register_module").style.display = "none";
+	}
+	function register_module(){//注册时，调用的函数
+		var mengban=document.getElementByIdx_x("mengban");
+		mengban.className="mengban";
+		var divs=document.getElementByIdx_x("register_module");
+		divs.style.display="block";
+	}
+</script>

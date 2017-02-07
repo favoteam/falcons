@@ -1,0 +1,59 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+var base_url='{$base_url}';
+</script>
+<div id="sn-bd">
+  <div class="sn-container">   	
+    <ul class="sn-quick-menu">
+		{insert_scripts files='utils.js,common.min.js'}
+		<font id="login-info" class="sn-login-info">
+			{* ECSHOP 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'}
+		</font>
+
+      
+      <script type="text/javascript">
+		function show_qcord(){
+			var qs=document.getElementById('sn-qrcode');
+			qs.style.display="block";
+		}
+		function hide_qcord(){
+			var qs=document.getElementById('sn-qrcode');
+			qs.style.display="none";
+		}
+	  </script>
+      <li class="menu-item" style="display:none;">
+      	<div class="sn-menu">
+        <a aria-haspopup="menu-6" tabindex="0" class="menu-hd sn-mobile-link" href="" target="_top">手机版<b></b></a>
+        <div class="menu-bd sn-qrcode" id="menu-5">
+          <ul>
+            <li class="app_xiazai">
+              <a href="#" target="_top" class="app_store"></a>
+              <img src="../images/app.jpg" alt="手机客户端" width="76px" height="76px" />               
+            </li>
+            <li class="app_xiazai1">
+              <a href="#" target="_top" class="app_android"></a> 
+              <img src="../images/android.jpg" alt="手机客户端" width="76px" height="76px" /> 
+            </li>
+           
+          </ul>
+        </div>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+</div>
+</div>
+<script>
+header_login();
+function header_login()
+{	
+	Ajax.call('login_act_ajax.php', '', loginactResponse, 'GET', 'JSON', '1', '1');
+}
+function loginactResponse(result)
+{
+	var MEMBERZONE =document.getElementById('login-info');
+	MEMBERZONE.innerHTML= result.memberinfo;
+}
+</script>

@@ -1,0 +1,193 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="margin-top:100px;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">{$lang.regist_login}
+		   <div style="margin-top:5px;font-size:20px;">
+		   </div>
+        </h4>
+      </div>
+      <div class="modal-body"  style="padding-bottom:60px;">
+        <div class="bs-example bs-example-tabs">
+				      <ul id="myTab" class="nav nav-tabs clearfix">
+				        <li class="active"><a href="javascript:void(0);" data-toggle="tab">{$lang.label_login}</a></li>
+				        <li class=""><a href="javascript:void(0);" data-toggle="tab">{$lang.label_regist}</a></li>
+				      </ul>
+				      <div id="myTabContent" class="tab-content">
+				        <div class="tab-pane fade active in" id="profile">
+				          	<form role="form" id="formLogin" name="userAjaxLoginForm" style="padding-top:20px;" onSubmit="return userAjaxLogin()">
+							  <div class="form-group">
+							    <label for="exampleInputEmail1"></label>
+							    <input type="text" name="username" class="form-control required useTitle validate-email" required-title="Email or Username" id="username" placeholder="Email or Username">
+							  </div>
+							  <div class="form-group">
+							    <label for="exampleInputPassword1"></label>
+							    <input type="password" name="password" class="form-control required useTitle min-length-6 max-length-16 ajax" maxlength="16" required-title="Password required"  placeholder="Password" min-length-title="密码由6到16位的字符组成" max-length-title="密码由6到16位的字符组成" id="password"/>
+							  </div><input type="checkbox" name="remember" id="rememberMeCheck" style=" display:none">
+							  <button type="button" onclick="userAjaxLogin()" id="login_btn" class="btn btn-buy  btn-block" style="height:38px;">{$lang.label_login}</button>
+							</form>
+				        </div>
+				        <div class="tab-pane fade" id="dropdown1">
+				          <form role="form" id="formUser" name="formUser" style="padding-top:20px;">
+							  
+                              <div id="loginerror" style="color:#F00; padding-left:10px;"></div>
+                              <div class="form-group">
+							    <label for="exampleInputEmail1"></label> 
+							    <input type="text" name="username" class="form-control required useTitle validate-email ajax" required-title="{$lang.username}" id="username" placeholder="{$lang.username}">
+							  </div>
+                              
+                              
+                              <div class="form-group">
+							    <label for="exampleInputEmail1"></label> 
+							    <input type="text" name="email" class="form-control required useTitle validate-email ajax" required-title="{$lang.email}" id="email_reg" placeholder="{$lang.email}">
+                                
+							  </div>
+                              
+                              
+							  <div class="form-group">
+							    <label for="exampleInputPassword1"></label>
+							    <input type="password" name="password" class="form-control required useTitle min-length-6 max-length-16" maxlength="16" required-title="Password required"  placeholder="{$lang.password}" min-length-title="密码由6到16位的字符组成" max-length-title="密码由6到16位的字符组成" id="password1"/>
+							  </div>
+							  
+							  <div class="form-group">
+							    <label for="exampleInputPassword1"></label>
+							    <input type="password" name="confirm_password" class="form-control required equals-reg_password useTitle min-length-6 max-length-16" maxlength="16" required-title="Password required" placeholder="Repeat {$lang.password}" min-length-title="密码由6到16位的字符组成" max-length-title="密码由6到16位的字符组成" id="conform_password"/>
+							  </div>
+							   <div class="checkbox disable-by-cy">
+								    <label style="font-size:12px;">
+								      <input type="checkbox" name="agreement" id="agree_ment_id"> 我已阅读并同意《<a style="color:#D2322D;" href="article.php?cat_id=-1" target="_blank">用户注册协议</a>》
+								    </label>
+							   </div>
+							  <button type="button" id="register_btn" onclick="ajaxRegister()" class="disabled btn btn-buy  btn-block" style="height:38px;">{$lang.label_regist}</button>
+							</form>
+				        </div>
+				      </div>
+			    </div>
+ <table width="176" border="0" cellpadding="0" cellspacing="0">
+                <tbody><tr>
+                  <td colspan="4"></td>
+                </tr>
+                <tr>
+{if $show_oauth_qq}<td width="47"><a href="user.php?act=oath&type=qq"><img src="images/qq_login.gif"/></a></td>{/if}
+{if $show_oauth_weibo}<td width="47"><a href="user.php?act=oath&type=weibo"><img src="images/sina_login.gif"/></a></td>{/if}
+{if $show_oauth_alipay}<td width="47"><a href="user.php?act=oath&type=alipay"><img src="images/alipay_login.png"/></a></td>{/if}
+{if $show_oauth_taobao}<td width="36"><a href="user.php?act=oath&type=taobao"><img src="images/taobao_login.gif"/></a></td>{/if}
+                </tr>
+            </tbody></table>
+      </div>
+      
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+	
+<script>
+
+
+$(".nav-tabs li").click(function(){
+		$(".nav-tabs li").removeClass("active");
+		$(this).addClass("active");
+		$(".tab-pane").hide();
+		var i = $(this).index();
+		$(".tab-pane").eq(i).show();
+})
+    
+function userAjaxLogin()
+{
+
+  var frm      = document.forms['userAjaxLoginForm'];
+  var username = frm.elements['username'].value;
+  var password = frm.elements['password'].value;
+  var remember = frm.elements['remember'].value;
+  var captcha = frm.elements['captcha'] ? frm.elements['captcha'].value : '';
+  
+ 
+  
+  var msg = '';
+  if (username.length == 0)
+  {
+    msg += '请输入用户名\n';
+  }
+  if (password.length == 0)
+  {
+    msg += '请输入密码\n';
+  }
+
+  if (msg.length > 0)
+  {
+    alert(msg);
+    return false;
+  }
+  else
+  {
+     Ajax.call('user.php', 'act=signin&username='+username+'&password='+password+'&remember='+remember+'&captcha='+captcha, userAjaxLoginResponse, 'POST', 'JSON');
+  }
+}
+
+function userAjaxLoginResponse(res)
+{
+  if (res.error > 0)
+  {
+     alert(res.content);
+	 return;
+  }
+  else
+  {
+       location.reload()
+  }
+}
+
+function openRegBox()
+{
+	document.getElementById('regLight').style.display='block';
+	document.getElementById('fade').style.display='block';
+}
+
+
+/* *
+ * 澶勭悊娉ㄥ唽鐢ㄦ埛
+ */
+function ajaxRegister()
+{
+  
+  var frm  = document.forms['formUser'];
+  var username  = frm.elements['username'].value;
+  var email  = frm.elements['email'].value;
+  var password  = Utils.trim(frm.elements['password'].value);
+  var confirm_password = Utils.trim(frm.elements['confirm_password'].value);
+  var checked_agreement = frm.elements['agreement'].checked;
+  
+  
+  var captcha = '';
+  var msg = "";
+  // 妫€鏌ヨ緭鍏�
+
+
+
+  if (msg.length > 0)
+  {
+    alert(msg);
+    return false;
+  }
+  else
+  {
+      Ajax.call('flow.php', 'step=signup&username='+username+'&password='+password+'&email='+email+"&agreement="+checked_agreement+"&captcha="+captcha, ajaxRegisterLoginResponse, 'POST', 'JSON');
+  }
+  
+}
+
+function ajaxRegisterLoginResponse(result)
+{
+	if (result.error > 0)
+	{
+	   document.getElementById('loginerror').innerHTML = result.content;
+	   return;
+	}
+	else
+	{
+		 location.reload()
+	}
+}
+
+</script>

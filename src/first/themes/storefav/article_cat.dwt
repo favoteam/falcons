@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="themes/storefav/css/article_list.css" />
+
+{* 包含脚本文件 *}
+{insert_scripts files='jquery.min.js'}
+{insert_scripts files='masonry.pkgd.js'}
+<style type="text/css">
+
+/* clearfix */
+.relativ_goods:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.grid-item {
+  margin:5px;
+  float: left;
+}
+</style>
+
+<script type="text/javascript">
+document.onreadystatechange = function () {      
+   if(document.readyState=="complete") {            
+	   $('.relativ_goods').masonry({
+			itemSelector: '.grid-item',
+			columnWidth: '.grid-item',
+			percentPosition: false
+		});    
+   }     
+}
+</script>
+
+</head>
+<body>
+<div id="site-nav"> 
+  <!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem --> 
+  <div class="blank"></div>
+  <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+  <div class="w main">
+    <div class="right-extra">
+
+      <h2 class="disable-by-cy">{$cat_name}</h2>
+      <ul class="article_list">
+        <!-- {foreach from=$artciles_list item=article name=article} -->
+         <li class="clearfix {if $smarty.foreach.article.iteration mod 2 eq 0}even{/if}">
+            <h3><a href="{$article.url}" title="{$article.title|escape:html}" target="_blank">{$article.short_title}</a></h3>
+            {if $article.title_pic}
+			<div class="pic disable-by-cy"><a href="{$article.url}"  target="_blank" title="{$article.title|escape:html}"><img src="{$article.title_pic|default:images/no_picture.gif}" width="180" height="140" alt="{$article.title|escape:html}"/></a></div>
+            {/if}
+			<div class="desc">
+               <p><a href="{$article.url}" title="{$article.title|escape:html}"  target="_blank">{$article.description|truncate:290}</a></p>               
+               
+               <div style="clear:both"></div>
+               
+            </div>
+			{if $article.goods_list}
+		   <div class="relativ_goods">
+			
+			<!--{foreach from=$article.goods_list item=releated_goods_data name=releated_goods_data}--> 
+			<div class="grid-item">
+			
+
+			<a href="{$releated_goods_data.url}">
+				{if count($article.goods_list) eq 1}
+					<img style="max-width:770px;" alt="{$releated_goods_data.name}"  src="{$releated_goods_data.goods_img}"/>
+				{elseif count($article.goods_list) eq 2 or count($article.goods_list) eq 4}
+					<img style="width:380px;" alt="{$releated_goods_data.name}"  src="{$releated_goods_data.goods_img}"/>
+				{else}
+					<img style="width:250px;" alt="{$releated_goods_data.name}"  src="{$releated_goods_data.goods_img}"/>
+				{/if}
+			</a>
+
+			
+			<div class="goods-price">
+			<strong> 
+			<!-- {if $releated_goods_data.promote_price neq 0} -->
+			  {$releated_goods_data.formated_promote_price}
+			  <!-- {else} -->
+			  {$releated_goods_data.shop_price}
+			  <!-- {/if} -->
+			  </strong>
+			  
+			  </div>
+			</div>
+			<!-- {/foreach} -->
+		   
+		   </div>
+		   {/if}
+		   
+         </li>
+         <!-- {/foreach} -->
+
+     
+        
+      </ul>
+      <div class="blank5"></div>
+      <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem --> 
+    </div>
+    <div class="left-extra"> 
+		<!-- #BeginLibraryItem "/library/article_category_tree.lbi" --><!-- #EndLibraryItem --> 
+		<!-- TemplateBeginEditable name="左边广告区域" --> <!-- TemplateEndEditable --> 
+    </div>
+    <div style="height:0px; line-height:0px; clear:both;"></div>
+  </div>
+  <!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem --> 
+  <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem --> 
+</div>
+</body>
+<script type="text/javascript">
+document.getElementById('cur_url').value = window.location.href;
+</script>
+
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<link href="article.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="themes/storefav/js/jquery-1.9.1.min.js" ></script>
+{insert_scripts files='jquery.json.js,transport.js'}
+{* 包含脚本文件 *}
+{insert_scripts files='common.js'}
+</head>
+<body>
+<div id="site-nav"> 
+  <!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+  <div class="blank"></div>
+  <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+  <div class="w main" >
+    <div class="right-extra" style="width:100%"> 
+      <div class="box">
+        <div class="box_1 article-68">
+          <div style="border:1px solid #E4E4E4; padding:10px 15px;">
+            <div class="tc" style="padding:20px 0px;">
+			
+			  <font class="f7">{$article.title|escape:html}</font><br />
+              <font class="f3">{$article.author|escape:html} / {$article.add_time}</font> 
+			  
+			<div style="padding:20px 10px;">  
+            <!-- {if $article.content } --> 
+            {$article.content} 
+            <!-- {/if} --> 
+            {if $article.open_type eq 2 or $article.open_type eq 1}<br />
+            <a href="{$article.file_url}" target="_blank">{$lang.relative_file}</a>
+            {/if}
+			</div>
+			</div>
+           <div style="clear:both;"></div>
+          <!--{ if $related_goods}-->
+		  <div class="m m2 related-buy">
+			<div class="mc">
+			  <ul>
+				<!--{foreach from=$related_goods item=releated_goods_data name=releated_goods_data}--> 
+				<li style="float:left">
+				<div style="margin:10px">
+					<a href="{$releated_goods_data.url}">
+						{if count($related_goods) eq 1}
+							<img max-width="928" alt="{$releated_goods_data.name}"  src="{$releated_goods_data.goods_img}"/>
+						{elseif count($related_goods) eq 2 or count($related_goods) eq 4}
+							<img width="450" alt="{$releated_goods_data.name}"  src="{$releated_goods_data.goods_img}"/>
+						{else}
+							<img width="293" alt="{$releated_goods_data.name}"  src="{$releated_goods_data.goods_img}"/>
+						{/if}
+						
+					</a>
+				</div>
+				<div style="padding:0px 10px;{if count($related_goods) eq 3 OR count($related_goods) gt 3}width:293px{/if}">
+					<a href="{$releated_goods_data.url}" target="_blank" title="{$releated_goods_data.goods_name|escape:html}">
+						{$releated_goods_data.goods_name}
+					</a>
+				</div>
+				<div style="padding:5px 10px;" class="p-price"><strong> 
+				<!-- {if $releated_goods_data.promote_price neq 0} -->
+				  {$releated_goods_data.formated_promote_price}
+				  <!-- {else} -->
+				  {$releated_goods_data.shop_price}
+				  <!-- {/if} -->
+				  </strong>
+				  </div>
+				</li>
+				<!-- {/foreach} -->
+			  </ul>
+			</div>
+		  </div>
+		  <!-- {/if} --> 
+            
+            <div  style="padding:10px;height:40px; margin-top:15px;border-top:1px solid #ccc;">
+              <div style="width:500px; text-align:left;float:left "> 
+                {if $next_article}
+                {$lang.next_article}:<a href="{$next_article.url}" class="f6">{$next_article.title}</a><br />
+                {/if} 
+                {if $prev_article}
+                {$lang.prev_article}:<a href="{$prev_article.url}" class="f6">{$prev_article.title}</a> {/if} </div>
+				<div style="float:right;">
+					<div class="collect_btn">
+					  <span class='st_googleplus' displayText='Google +'></span>
+					  <span class='st_facebook' displayText='Facebook'></span>
+					  <span class='st_twitter' displayText='Tweet'></span>
+					  <!-- <span class='st_linkedin' displayText='LinkedIn'></span> -->
+					  <span class='st_pinterest' displayText='Pinterest'></span>
+					  <!-- <span class='st_email' displayText='Email'></span> -->
+					</div>
+
+					<script type="text/javascript">var switchTo5x=true;</script>
+					<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+					<script type="text/javascript">stLight.options({publisher: "d8804f04-9a1c-4e86-9086-9c2c73ea79b8", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+				</div>
+			
+            </div>
+
+          </div>
+		  
+        </div>
+      </div>
+      <div class="blank"></div>
+    </div>
+    <div class="left-extra" style="display:none"> 
+	<!-- #BeginLibraryItem "/library/article_category_tree.lbi" --><!-- #EndLibraryItem --> 
+	<!-- TemplateBeginEditable name="左边广告区域" --> <!-- TemplateEndEditable --> 
+    </div>
+    <div class="blank"></div>
+  </div>
+  <!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem --> 
+  <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem --> 
+</div>
+</body>
+</html>
