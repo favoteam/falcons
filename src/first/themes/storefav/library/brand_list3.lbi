@@ -1,0 +1,476 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+
+.flow-item ul {
+	zoom: 1;
+	position: relative;
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+}
+.clearfix:after {
+	content: " ";
+	display: block;
+	clear: both;
+	height: 0;
+}
+.list-img {
+	position: relative;
+	margin-right: 14px;
+	padding-bottom: 20px;
+	margin-top: 5px;
+	float: left;
+*  display: inline
+}
+.list-img a {
+	display: block;
+	width: 130px;
+	height: 130px;
+	vertical-align: middle;
+	line-height: 100px;
+	font-size: 0;
+*  font-size: 52px;
+	text-align: center;
+	border: 1px solid #E6E6E6;
+	background: #fff;
+}
+.list-img a img {
+	max-width: 130px;
+	max-height: 130px;
+	vertical-align: middle;
+}
+.list-info {
+	width: 333px;
+	height: 100%;
+	margin-top: 2px;
+	float: left;
+*  display: inline;
+}
+.list-info h4 {
+	font-size: 14px;
+	line-height: 24px;
+	height: 24px;
+	position: relative;
+}
+.list-info h4 .shop-name {
+	vertical-align: middle;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	max-width: 179px;
+	_width: 179px;
+	overflow: hidden;
+	margin-right: 10px;
+	display: inline-block;
+}
+.list-info h4 a {
+	color: #0063DC;
+	display: inline-block;
+}
+.list-info .rank {
+	vertical-align: top;
+	margin-top: 4px;
+.  padding: 0 !important;
+	display: inline-block;
+*  display: block;
+	width: 0;
+	height: 16px;
+	vertical-align: text-top;
+*  vertical-align: baseline;
+	text-indent: -999em;
+	overflow: hidden;
+	background: url(//img.alicdn.com/tps/i1/T1zihIXkxyXXXXXXXX.png) repeat-x scroll -999em -999em transparent;
+}
+.list-info .seller-rank-12 {
+	background-position: 0 -64px;
+	width: 34px
+}
+.list-info p {
+	line-height: 21px;
+	height: 21px;
+	width: 270px;
+	overflow: hidden;
+	padding-top: 3px;
+}
+.list-info p span {
+}
+.list-info a {
+	display: inline;
+	float: initial;
+}
+.ww-light {
+	overflow: hidden;
+}
+.list-info p label {
+	display: block;
+	float: left;
+	margin-right: 1px;
+	width: 31px;
+	cursor: default;
+}
+.list-info p.main-cat a {
+	color: #0063DC;
+	width: 238px;
+	display: inline-block;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.list-info .quan {
+ *  position: relative;
+	margin: 29px 0 5px -85px;
+	height: 18px;
+}
+.list-info .promotion {
+	padding-left: 10px;
+	margin: 1px 0;
+}
+.list-info .promotion .promotion-taojinbi {
+	background-color: #f96;
+	color: #fff;
+	float: left;
+	height: 15px;
+	line-height: 15px;
+	padding: 0 4px;
+	margin-top: 1px;
+}
+.list-info .promotion em {
+	margin-right: 4px;
+}
+.pro-sale-num {
+	color: #888;
+	margin-left: -85px;
+	position: relative;
+	top: 9px;
+*  zoom: 1;
+}
+.info-sale {
+	margin-right: 8px;
+}
+.pro-sale-num em {
+	color: #676666;
+	font-weight: 700;
+}
+.valuation {
+	width: 353px;
+	height: 28px;
+	line-height: 28px;
+	margin-top: 17px;
+	position: relative;
+	margin-left: -84px;
+	z-index: 3;
+}
+.good-comt {
+	float: left;
+	padding-right: 9px;
+	width: auto;
+	height: 28px;
+}
+.descr {
+	float: left;
+	margin-top: 8px;
+	line-height: 14px;
+	position: relative;
+}
+.shop-products {
+	width: 610px;
+	height: 180px;
+	overflow: hidden;
+	position: absolute;
+
+	right: 1px;
+}
+div.shop-products-container {
+	width: 624px;
+	overflow: hidden;
+	height: 160px;margin-top:10px;
+}
+div.one-product {
+	float: left;
+	overflow: hidden;
+	width: 140px;
+	height:160px;
+	display: block;
+}
+div.one-product .product-img {
+	border: 1px solid #E6E6E6;
+	text-align: center;
+	width: 130px;
+	height: 130px;
+}
+.product-img img {
+	height: 120px;
+	width: 120px;
+}
+.price-wrap {
+	height: 16px;
+	overflow: hidden;
+	z-index: 1;
+	position: absolute;
+	margin-left: 6px;
+	bottom: 3px;
+}
+.price-wrap-shade {
+	position: absolute;
+	width: 120px;
+	height: 20px;
+	top: -1px;
+	left: 1px;
+	background: #fff;
+	opacity: .95;
+	filter: alpha(opacity=95);
+	zoom: 1;
+	z-index: -1;
+}
+.price-wrap .g_price {
+	font-family: arial;
+}
+.price-wrap .price-num {
+	height: 18px;
+	line-height: 18px;
+}
+.item-bottom {
+	height: 32px;
+	width: 624px;
+	margin-left: 361px;
+	line-height: 32px;
+	margin-bottom: 11px;
+	position: relative;
+	top: -29px;
+}
+.shop-news {
+	max-width: 300px;
+	_width: 300px;
+	padding-left: 15px;
+	margin-left: 20px;
+	background: url(//img.alicdn.com/tps/i2/T1gvk7XoJfXXbZe.E_-11-13.png) no-repeat 0 10px;
+}
+.related-shop-new {
+	color: #0063DC;
+	font-family: sans-serif;
+	position: absolute;
+	right: 0;
+	top: 0;
+	margin-right: -5px;
+	height: 19px;
+	line-height: 20px;
+	margin-top: 11px;
+	padding: 0 8px;
+}
+
+.pre-page2:hover {
+    background-position: -23px -0px;
+    left: 0;
+    opacity: 1;
+}
+.next-page:hover {
+    background-position: -70px -0px;
+    opacity: 1;
+    right: 5px;
+}
+.pre-page2 {
+    background-position: 0 -0px;
+    left: 0;
+    opacity: 0.7;
+}
+.page-btn {
+    background:url("/images/bg.png") no-repeat scroll 0 0;
+    display: none;
+    height: 33px;
+    position: absolute;
+    top: 42px;
+    width: 18px;z-index:999999999999999
+}
+
+.next-page {
+    background-position: -46px -0px;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    opacity: 0.7;
+    right: 5px;
+}
+</style>
+<div class="flow-wrap clearfix">
+<!--{foreach from=$shops_list item=shop name=shop}-->
+	<div class="flow-item first" ajax-get-product data-brand='{$shop.id}'>
+      <div class="flow-content">
+      	<p class="flow-title">
+			<a href="{$shop.url}" title="{$shop.supplier_title}"><span>{$shop.brand_name}</span></a>
+            <span id="collect_brand_{$shop.brand_id}">{insert name=collect_btn id=$shop.id}</span>
+        </p>
+		<p class="flow-desc">
+        	<a href="{$shop.url}" title="All items"><strong>{$shop.goods_number}</strong> items>></a>
+        </p>
+      </div>
+	  <div class="flow-main flow-main{$smarty.foreach.shop.iteration}">
+      	<div class="picMarquee-left">
+			<div class="bda">
+
+		<div class="picListta">
+
+
+			<div class="shop-products-container" style="width: 624px; overflow: hidden;">
+                      <div class="goods-box" style="position: absolute; left:0px;" id="{$shop.id}">
+                      {if $shop.goods_info}
+                       {foreach from=$shop.goods_info item=goods name=goods}
+                        <div class="one-product" style="float: left; overflow: hidden;  display: block;">
+                          <div class="product-img"> <a trace="auction" href="{$goods.url}" target="_blank" title="{$goods.goods_name}"> <img src="{$goods.goods_thumb}"> </a> </div>
+                          <div class="price-wrap">
+                            <div class="price-wrap-shade"></div>
+                            <span class="price-num">{$goods.shop_price}</span> </div>
+                        </div>
+            			{/foreach}
+                     {/if}
+                      </div>
+
+                      <a trace="inshopLButton" href="javascript:void(0)" class="pre-page2 page-btn" data-id="{$shop.id}"></a>
+                      <a trace="inshopRButton" href="javascript:void(0)" class="next-page page-btn" data-id="{$shop.id}"></a>
+                    </div>
+
+
+               </div>
+
+			</div>
+		</div>
+      </div>
+	</div>
+<!--{foreachelse}-->
+</div>
+<div class="flow-wrap clearfix"  style="width:978px;text-align:center;padding:55px 0px;border:1px #dddddd solid;margin:30px 0px">
+Could not find any record!
+</div>
+<!--{/foreach}-->
+<script>
+(function($){
+
+				$.fn.parallelRoll = function(options){
+
+					var opts = $.extend({}, $.fn.parallelRoll.defaults, options);
+
+					var _this = this;
+					var l = _this.find(opts.tagName).length;
+
+					var autoRollTimer;
+
+					var flag = true; // 防止用户快速多次点击上下按钮
+
+					var arr = new Array();
+
+				
+					var w = _this.find(opts.tagName).outerWidth(true); //计算元素的宽度  包括补白+边框
+
+					_this.css({width: (l * w) + 'px'}); // 设置滚动层盒子的宽度
+                        _this.parent().find('.'+opts.prev).on('click',function(){
+
+							flag ? left() : "";
+
+						});
+
+						_this.parent().find('.'+opts.next).on('click',function(){
+
+							flag ? right() : "";
+
+						});
+
+					var maxLeft = w*(l-opts.amount);
+					
+					function left(){
+						var left23 = _this.css('marginLeft');
+						var xs = parseInt(left23.substring(0,left23.length-2));
+			
+						if(Math.abs(xs) >= maxLeft)
+						{
+							return;
+						}
+					
+						flag = false;
+						
+
+						_this.animate({marginLeft : xs-(w*opts.amount)},1000,function(){
+
+
+							flag = true;
+
+						});
+
+					};
+
+					function right(){
+						var left23 = _this.css('marginLeft');
+						var xs = parseInt(left23.substring(0,left23.length-2));
+						if(xs == 0)
+						{
+							return;
+						}
+						flag = false;
+						
+						var s =  xs+w*opts.amount;
+						if(s >=0)
+						{
+							s  = 0;
+						}
+						_this.animate({marginLeft : s},1000,function(){
+							
+							flag = true;
+						});
+					};
+
+				};
+
+				//插件默认选项
+
+			    $.fn.parallelRoll.defaults = {
+
+			    	boxName : 'box',
+
+			        tagName : 'dd',
+
+			        time : 3000,  //
+
+			        direction : 'left', // 滚动方向
+
+			        visual : 5 , //可视数
+
+			        prev : 'next',
+
+			        next : 'prev',
+
+			        amount : 1   // 滚动数  默认是1
+
+			    };
+
+			})(jQuery);
+
+$().ready(function()
+{
+    $('[ajax-get-product]').each(function()
+    {
+	
+        var brandId = $(this).data('brand');
+        $.getJSON('/search_store.php?a=goods&brandId='+brandId+'&keywords={$search_keywords}',function(data)
+        {
+            var html = '';
+                        for(var i in data)
+                        {
+                            var goods = data[i];
+                            html += '<div class="one-product" style="float: left; overflow: hidden;  display: block;">'+
+                                    '<div class="product-img"> <a trace="auction" href="'+goods.url+'" target="_blank" title="'+goods.goods_name+'"> <img src="'+goods.goods_thumb+'"> </a> </div>'+
+                                    '<div class="price-wrap">'+
+                                    '<div class="price-wrap-shade"></div>'+
+                                    '<span class="price-num">'+goods.shop_price+'</span> </div>'+
+                                    '</div>';
+                        }
+                        $('#'+brandId).html(html);
+            $('#'+brandId).parallelRoll({
+                        'boxName' : '.shop-products-container',
+                        'tagName':'.one-product',
+                        'prev' : 'next-page',
+                        'next':'pre-page2',
+                        amount : 7
+
+                    });
+        });
+    });
+
+
+});
+</script>
